@@ -1,0 +1,4 @@
+#ifndef ARDUINO_PRINTF_H_
+#define ARDUINO_PRINTF_H_
+
+#endif //ARDUINO_PRINTF_H_
