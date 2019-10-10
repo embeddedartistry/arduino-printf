@@ -36,6 +36,10 @@ void _putchar(char character)
 
 And your prototype will be used instead of the library's version.
 
+## Disabling Specific Formats
+
+If memory footprint is critical, floating point, exponential and 'long long' support and can be turned off via the `PRINTF_DISABLE_SUPPORT_FLOAT`, `PRINTF_DISABLE_SUPPORT_EXPONENTIAL` and `PRINTF_DISABLE_SUPPORT_LONG_LONG` compiler switches. You must define these symbols in the build system.
+
 ## Examples
 
 Multiple examples are provided with this library in the [examples/](examples/) folder.
