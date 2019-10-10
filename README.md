@@ -4,12 +4,18 @@ This library adds support for the `printf()` function to Arduino projects. This 
 
 ## Using the Library
 
+To use this library in your Arduino project, you need to include the header:
+
+```
+#include ArduinoPrintf.h
+```
+
 By default, the library can be used without any special initialization. The `Serial` object is the default output target. You must still initialize the `Serial` object in `setup()`, the library will not do this for you.
 
 You can specify any class derived from the `Print` base class for use with `printf()`. To change the output class, use the `printf_init` function in `setup()`:
 
 ```
-printf_init(&Serial1);
+printf_init(Serial1);
 Serial1.begin(115200);
 ```
 
@@ -35,6 +41,10 @@ void _putchar(char character)
 ```
 
 And your prototype will be used instead of the library's version.
+
+## Advanced Use
+
+You can include `printf.h` directly and supply your own implementation of `_putchar`. This approach is useful if you want to use the library in a test suite (skipping Arduino SDK headers).
 
 ## Disabling Specific Formats
 
