@@ -1,3 +1,10 @@
+/**
+* This sketch demonstrates the ability to override the ArduinoPrintf library's
+* default implementation of _putchar() with a custom user implementation.
+* You can do anything you want in your _putchar() function: output to multiple ports,
+* filter data, add extra characters, etc.
+*/
+
 #include <ArduinoPrintf.h>
 
 void setup() {

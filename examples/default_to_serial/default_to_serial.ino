@@ -1,3 +1,12 @@
+/**
+* This sketch demonstrates using the ArduinoPrintf library with the default setup,
+* which requires no initialization. The Serial class will be used as the output
+* for the ArduinoPrintf library.
+*
+* You are still responsible for initializing the Print class in setup(), the
+* ArduinoPrintf library will not do that for you.
+*/
+
 #include <ArduinoPrintf.h>
 
 void setup() {

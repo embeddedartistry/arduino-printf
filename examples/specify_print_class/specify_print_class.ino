@@ -1,3 +1,12 @@
+/**
+* This sketch demonstrates using the ArduinoPrintf library with a custom
+* Print class of your choice. Call printf_init() with the desired output class.
+* Any class which has Print as a base class can be used.
+*
+* You are still responsible for initializing the Print class in setup(), the
+* ArduinoPrintf library will not do that for you.
+*/
+
 #include <ArduinoPrintf.h>
 
 void setup() {
