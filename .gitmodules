@@ -2,5 +2,5 @@
 	path = tools/format
 	url = git@github.com:embeddedartistry/format.git
 [submodule "printf"]
-	path = printf
+	path = extras/printf/printf
 	url = git@github.com:mpaland/printf.git
