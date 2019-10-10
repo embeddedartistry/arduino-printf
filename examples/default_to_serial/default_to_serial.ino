@@ -7,7 +7,7 @@
 * ArduinoPrintf library will not do that for you.
 */
 
-#include <ArduinoPrintf.h>
+#include <LibPrintf.h>
 
 void setup() {
   Serial.begin(115200);

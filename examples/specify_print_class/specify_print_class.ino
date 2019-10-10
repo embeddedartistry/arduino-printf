@@ -7,7 +7,7 @@
 * ArduinoPrintf library will not do that for you.
 */
 
-#include <ArduinoPrintf.h>
+#include <LibPrintf.h>
 
 void setup() {
   // Specify the print class to use with printf().

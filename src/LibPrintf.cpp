@@ -1,4 +1,4 @@
-#include "ArduinoPrintf.h"
+#include "LibPrintf.h"
 #include "Arduino.h"
 
 static Print& print_instance = Serial;

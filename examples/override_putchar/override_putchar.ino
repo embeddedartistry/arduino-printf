@@ -5,7 +5,7 @@
 * filter data, add extra characters, etc.
 */
 
-#include <ArduinoPrintf.h>
+#include <LibPrintf.h>
 
 void setup() {
   // But the important detail: you are responsible for initializing the interface!
