@@ -1,6 +1,5 @@
 #include "ArduinoPrintf.h"
 #include "Arduino.h"
-#include <assert.h>
 
 static Print* print_instance = &Serial;
 
@@ -10,8 +9,6 @@ void printf_init(Print* PrintClass)
 	{
 		print_instance = PrintClass;
 	}
-
-	assert(print_instance);
 }
 
 // If you use the default printf() implementation, this function will route the output
