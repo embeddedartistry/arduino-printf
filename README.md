@@ -7,10 +7,8 @@ This library adds support for the `printf()` function to Arduino projects. This 
 This library provides a standalone implementation for the following functions:
 
 * `printf()`
-* `sprintf()`
-* `snprintf()`
-* `vprintf()`
-* `vsnprintf()`
+* `sprintf()` and `snprintf()`
+* `vprintf()` and `vsnprintf()`
 
 ## Project Target
 
