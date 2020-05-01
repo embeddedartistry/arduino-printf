@@ -6,25 +6,25 @@ This library adds support for the `printf()` function to Arduino projects. This 
 
 This library provides a standalone implementation for the following functions:
 
-* `printf`
-* `sprintf`
-* `snprintf`
-* `vprintf`
-* `vsnprintf`
+* `printf()`
+* `sprintf()`
+* `snprintf()`
+* `vprintf()`
+* `vsnprintf()`
 
-All that is necessary is to provide an implementation of a `_putchar` function that is used to output a character to your target location.
+All that is necessary is to provide an implementation of a `_putchar()` function that is used to output a character to your target location.
 
 ## Using the Library
 
 To use this library in your Arduino project, you need to include the header:
 
 ```
-#include LibPrintf.h
+#include <LibPrintf.h>
 ```
 
 By default, the library can be used without any special initialization. The `Serial` object is the default output target. You must still initialize the `Serial` object in `setup()`, the library will not do this for you.
 
-You can specify any class derived from the `Print` base class for use with `printf()`. To change the output class, use the `printf_init` function in `setup()`:
+You can specify any class derived from the `Print` base class for use with `printf()`. To change the output class, use the `printf_init()` function in `setup()`:
 
 ```
 printf_init(Serial1);
@@ -56,7 +56,7 @@ And your prototype will be used instead of the library's version.
 
 ## Advanced Use
 
-You can include `printf.h` directly and supply your own implementation of `_putchar`. This approach is useful if you want to use the library in a test suite (skipping Arduino SDK headers).
+You can include `printf.h` directly and supply your own implementation of `_putchar()`. This approach is useful if you want to use the library in a test suite (skipping Arduino SDK headers).
 
 ## Disabling Specific Formats
 
@@ -74,6 +74,6 @@ Multiple examples are provided with this library in the [examples/](examples/) f
     - Any class derived from the `Print` base class can be used with the `printf` library
     - This example initializes `printf` with `Serial1` instead of `Serial`
 * [Override Putchar](examples/override_putchar/override_putchar.ino)
-    - Because the `_putchar` function is weakly linked, you can override the default implementation to supply your own in the sketch
-    - This example overrides `_putchar` and adds a space in between every letter
-    - You can implement any kind of logic within `_putchar` that you like, such as outputting information to multiple ports
+    - Because the `_putchar()` function is weakly linked, you can override the default implementation to supply your own in the sketch
+    - This example overrides `_putchar()` and adds a space in between every letter
+    - You can implement any kind of logic within `_putchar()` that you like, such as outputting information to multiple ports
