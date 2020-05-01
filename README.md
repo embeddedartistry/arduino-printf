@@ -12,8 +12,6 @@ This library provides a standalone implementation for the following functions:
 * `vprintf()`
 * `vsnprintf()`
 
-All that is necessary is to provide an implementation of a `_putchar()` function that is used to output a character to your target location.
-
 ## Using the Library
 
 To use this library in your Arduino project, you need to include the header:
