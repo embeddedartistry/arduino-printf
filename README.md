@@ -30,7 +30,14 @@ To use this library in your Arduino project, you need to include the header:
 #include <LibPrintf.h>
 ```
 
-By default, the library can be used without any special initialization. The `Serial` object is the default output target. You must still initialize the `Serial` object in `setup()`, the library will not do this for you.
+By default, the library can be used without any special initialization. Any `printf()` calls will be output using 
+the Arduino `Serial` interface.
+
+## Advanced Usage
+
+You can include `printf.h` directly and supply your own implementation of `_putchar()`. This approach is useful if you want to use the library in a test suite (skipping Arduino SDK headers).
+
+### Changing Default Output Target
 
 You can specify any class derived from the `Print` base class for use with `printf()`. To change the output class, use the `printf_init()` function in `setup()`:
 
@@ -39,36 +46,13 @@ printf_init(Serial1);
 Serial1.begin(115200);
 ```
 
-More complicated logic is possible, such as sending `printf()` output to multiple locations. The `mpaland/printf` library requires that the end-user defines a `void _putchar(char character)` function, which is used by all other library functions.
+### More Complicated Output Scenarios
 
-Within this library, the implementation is weakly linked:
-
-```
-extern "C" __attribute__((weak)) void _putchar(char character)
-{
-    print_instance->print(character);
-}
-```
-
-To implement more complex behaviors, simply define this function in your Sketch or program:
-
-```
-void _putchar(char character)
-{
-  Serial.print(character);
-  Serial.print(' ');
-}
-```
-
-And your prototype will be used instead of the library's version.
-
-## Advanced Use
-
-You can include `printf.h` directly and supply your own implementation of `_putchar()`. This approach is useful if you want to use the library in a test suite (skipping Arduino SDK headers).
+More complicated logic is possible, such as sending `printf()` output to multiple locations. The `mpaland/printf` library requires that the end-user defines a `_putchar()` function, which is used by all other library functions. There is an example script that explains this.
 
 ## Disabling Specific Formats
 
-If memory footprint is critical, floating point, exponential and 'long long' support and can be turned off via the `PRINTF_DISABLE_SUPPORT_FLOAT`, `PRINTF_DISABLE_SUPPORT_EXPONENTIAL` and `PRINTF_DISABLE_SUPPORT_LONG_LONG` compiler switches. You must define these symbols in the build system.
+If memory footprint is critical, floating point, exponential, and 'long long' support and can be turned off via the `PRINTF_DISABLE_SUPPORT_FLOAT`, `PRINTF_DISABLE_SUPPORT_EXPONENTIAL` and `PRINTF_DISABLE_SUPPORT_LONG_LONG` compiler switches. You must define these symbols in the build system.
 
 ## Examples
 
