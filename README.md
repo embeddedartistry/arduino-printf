@@ -1,4 +1,4 @@
-# arduino-printf
+# Arduino Printf
 
 This library adds support for the `printf()` function to Arduino projects. This code leverages the wonderful [mpaland/printf](https://github.com/mpaland/printf) library, which is designed for use in embedded systems. For more information about what is available, please refer to the [parent library documentation](https://github.com/mpaland/printf/blob/master/README.md).
 
