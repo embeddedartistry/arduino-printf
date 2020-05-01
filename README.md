@@ -61,11 +61,9 @@ Multiple examples are provided with this library in the [examples/](examples/) f
 * [Default Usage](examples/default_to_serial/default_to_serial.ino)
     - Without any initialization, `Serial` will be the default output for `printf()`
     - This example initializes the `Serial` class and prints in a loop
-    - Open the Arduino serial monitor to see the output
 * [Specify Print Class](examples/specify_print_class/specify_print_class.ino)
-    - Any class derived from the `Print` base class can be used with the `printf` library
+    - Any class derived from the `Print` base class can be used with the **Arduino Printf** library
     - This example initializes `printf` with `Serial1` instead of `Serial`
 * [Override Putchar](examples/override_putchar/override_putchar.ino)
-    - Because the `_putchar()` function is weakly linked, you can override the default implementation to supply your own in the sketch
     - This example overrides `_putchar()` and adds a space in between every letter
     - You can implement any kind of logic within `_putchar()` that you like, such as outputting information to multiple ports
