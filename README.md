@@ -26,6 +26,10 @@ To use this library in your Arduino project, you need to include the header:
 
 ```
 #include <LibPrintf.h>
+
+void setup() {
+    serial.begin(115200);
+}
 ```
 
 By default, the library can be used without any special initialization. Any `printf()` calls will be output using 
