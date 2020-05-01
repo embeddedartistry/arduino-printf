@@ -12,6 +12,16 @@ This library provides a standalone implementation for the following functions:
 * `vprintf()`
 * `vsnprintf()`
 
+## Project Target
+
+This library aims to offer a complete `printf()` solution while maintaining low storage and flash requirements. 
+This is **critical** for MCUs with limited storage and RAM. This project is ideal for [AVR based MCUs](https://en.wikipedia.org/wiki/AVR_microcontrollers) like the 
+Arduino Uno and it's siblings.
+
+## [ESP8266](https://github.com/esp8266/Arduino) and [ESP32](https://github.com/espressif/arduino-esp32)
+The Arduino implementations for the ESP8266 and ESP32 already include a `printf()` implementation as part of 
+the base library.
+
 ## Using the Library
 
 To use this library in your Arduino project, you need to include the header:
