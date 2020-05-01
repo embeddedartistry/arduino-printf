@@ -12,7 +12,7 @@ This library provides a standalone implementation for the following functions:
 
 ## Project Target
 
-This library aims to offer a complete `printf()` solution while maintaining low storage and flash requirements. 
+This library aims to offer a complete `printf()` solution while maintaining low storage and RAM requirements. 
 This is **critical** for MCUs with limited storage and RAM. This project is ideal for [AVR based MCUs](https://en.wikipedia.org/wiki/AVR_microcontrollers) like the 
 Arduino Uno and it's siblings.
 
