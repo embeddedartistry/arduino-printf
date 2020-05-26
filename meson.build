@@ -9,55 +9,41 @@ project('Arduino-Printf', 'cpp',
                      ],
   )
 
-assert(meson.is_cross_build(), 'This library can only be built in a cross build environment.')
-
-if host_machine.cpu_family() != 'avr'
-	error('The Meson build for this library is only configured for AVR processors')
-endif
-
-arduinocore = subproject('arduinocore-avr')
-arduinocore_dep = arduinocore.get_variable('arduinocore_dep')
-arduinocore_main_dep = arduinocore.get_variable('arduinocore_main_dep')
-
-libPrintf_includes = include_directories('src')
-
-libPrintf = static_library('Printf',
-	'src/LibPrintf.cpp',
-	include_directories: libPrintf_includes,
-	dependencies: arduinocore_dep,
+# This dependency is used when using libPrintf in unit tests on the host machine
+libPrintf_test_dep = declare_dependency(
+	include_directories: include_directories('extras/printf', 'extras/test', is_system: true),
+	sources: files('extras/printf/printf.c'),
 )
 
-libPrintf_dep = declare_dependency(
-	include_directories: libPrintf_includes,
-	link_with: libPrintf,
-)
+# The library itself is only available when cross-compiled
+# for AVR due to the use of Arduino Core
+if meson.is_cross_build()
+	if host_machine.cpu_family() != 'avr'
+		error('The Meson build for this library is only configured for AVR processors')
+	endif
 
-if meson.is_subproject() == false
-	# Compile example applications
-	executable('default_to_serial',
-		files('extras/sketch_cpp/default_to_serial.cpp'),
-		dependencies: [
-			libPrintf_dep,
-			arduinocore_dep,
-			arduinocore_main_dep,
-		],
-		install: false
+	arduinocore = subproject('arduinocore-avr')
+	arduinocore_dep = arduinocore.get_variable('arduinocore_dep')
+	arduinocore_main_dep = arduinocore.get_variable('arduinocore_main_dep')
+
+	libPrintf_includes = include_directories('src')
+
+	libPrintf = static_library('Printf',
+		'src/LibPrintf.cpp',
+		include_directories: libPrintf_includes,
+		dependencies: arduinocore_dep,
+		build_by_default: meson.is_subproject() == false
 	)
 
-	executable('override_putchar',
-		files('extras/sketch_cpp/override_putchar.cpp'),
-		dependencies: [
-			libPrintf_dep,
-			arduinocore_dep,
-			arduinocore_main_dep,
-		],
-		install: false
+	libPrintf_dep = declare_dependency(
+		include_directories: libPrintf_includes,
+		link_with: libPrintf,
 	)
 
-	if host_machine.cpu() == 'atmega2560'
-		# Serial1 is only usable on the Mega, not the Uno
-		executable('specify_print_class',
-			files('extras/sketch_cpp/specify_print_class.cpp'),
+	if meson.is_subproject() == false
+		# Compile example applications
+		executable('default_to_serial',
+			files('extras/sketch_cpp/default_to_serial.cpp'),
 			dependencies: [
 				libPrintf_dep,
 				arduinocore_dep,
@@ -65,5 +51,28 @@ if meson.is_subproject() == false
 			],
 			install: false
 		)
+
+		executable('override_putchar',
+			files('extras/sketch_cpp/override_putchar.cpp'),
+			dependencies: [
+				libPrintf_dep,
+				arduinocore_dep,
+				arduinocore_main_dep,
+			],
+			install: false
+		)
+
+		if host_machine.cpu() == 'atmega2560'
+			# Serial1 is only usable on the Mega, not the Uno
+			executable('specify_print_class',
+				files('extras/sketch_cpp/specify_print_class.cpp'),
+				dependencies: [
+					libPrintf_dep,
+					arduinocore_dep,
+					arduinocore_main_dep,
+				],
+				install: false
+			)
+		endif
 	endif
 endif
