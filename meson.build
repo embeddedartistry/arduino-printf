@@ -52,7 +52,6 @@ if meson.is_cross_build()
 			files('extras/sketch_cpp/default_to_serial.cpp'),
 			dependencies: [
 				libPrintf_dep,
-				arduinocore_dep,
 				arduinocore_main_dep,
 			],
 			install: false
@@ -62,7 +61,6 @@ if meson.is_cross_build()
 			files('extras/sketch_cpp/override_putchar.cpp'),
 			dependencies: [
 				libPrintf_dep,
-				arduinocore_dep,
 				arduinocore_main_dep,
 			],
 			install: false
@@ -74,7 +72,6 @@ if meson.is_cross_build()
 				files('extras/sketch_cpp/specify_print_class.cpp'),
 				dependencies: [
 					libPrintf_dep,
-					arduinocore_dep,
 					arduinocore_main_dep,
 				],
 				install: false
