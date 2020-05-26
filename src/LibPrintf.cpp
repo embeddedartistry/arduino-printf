@@ -1,6 +1,17 @@
 #include "LibPrintf.h"
 #include "Arduino.h"
 
+#ifdef __AVR__
+#ifndef PRINTF_PREVENT_DEFAULT_AVR_SETTINGS
+#define PRINTF_DISABLE_SUPPORT_EXPONENTIAL
+#define PRINTF_DISABLE_SUPPORT_LONG_LONG
+#endif
+#endif
+
+// We include `printf.c` hear so we can actually control the default settings without
+// modifying the original source file
+#include "../extras/printf/printf.c"
+
 static Print& print_instance = Serial;
 
 void printf_init(Print& PrintClass)

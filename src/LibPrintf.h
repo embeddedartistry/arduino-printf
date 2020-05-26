@@ -2,7 +2,7 @@
 #define ARDUINO_PRINTF_H_
 
 #include "Print.h"
-#include "printf.h"
+#include "../extras/printf/printf.h"
 
 // In Setup(), you must initialize printf with a Print class if you don't want
 // to use the default Serial object. If you want the default behavior, calling this
