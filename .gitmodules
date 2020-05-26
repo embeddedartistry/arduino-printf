@@ -1,6 +1,3 @@
-[submodule "tools/format"]
-	path = tools/format
-	url = git@github.com:embeddedartistry/format.git
 [submodule "printf"]
 	path = extras/printf/printf-submodule
 	url = git@github.com:mpaland/printf.git
