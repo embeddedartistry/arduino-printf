@@ -1,6 +1,6 @@
 project('Arduino-Printf', 'cpp',
   version : '1.1.0',
-  license : 'LGPL2.1+',
+  license : 'MIT',
   default_options : ['buildtype=minsize',
                      'b_lto=true',
                      'c_std=gnu11',
