@@ -17,9 +17,10 @@ This is **critical** for MCUs with limited storage and RAM. This project is idea
 Arduino Uno and it's siblings.
 
 ## ESP8266 and ESP32
+
 The Arduino implementations for the [ESP8266](https://github.com/esp8266/Arduino) and 
 [ESP32](https://github.com/espressif/arduino-esp32) already include a `printf()` implementation 
-as part of the base library. Using this library on those platforms would most likely be redundant.
+as part of the base library. You do not need this library for those platforms.
 
 ## Using the Library
 
@@ -40,9 +41,47 @@ the Arduino `Serial` interface.
 
 See [advanced_usage.md](advanced_usage.md).
 
-## Disabling Specific Formats
+## Configuration
 
-If memory footprint is critical, floating point, exponential, and 'long long' support and can be turned off via the `PRINTF_DISABLE_SUPPORT_FLOAT`, `PRINTF_DISABLE_SUPPORT_EXPONENTIAL` and `PRINTF_DISABLE_SUPPORT_LONG_LONG` compiler switches. You must define these symbols in the build system.
+If memory footprint is critical, you can disable library features using compiler definitions. Available controls are:
+
+* `PRINTF_NTOA_BUFFER_SIZE` (unsigned integer)
+    * 'ntoa' conversion buffer size, this must be big enough to hold one converted numeric number including padded zeros (dynamically created on stack)
+    * Default: 32 bytes
+* `PRINTF_FTOA_BUFFER_SIZE` (unsigned integer)
+    - 'ftoa' conversion buffer size, this must be big enough to hold one converted float number including padded zeros (dynamically created on stack)
+    - Default: 32 bytes
+* `PRINTF_DISABLE_SUPPORT_FLOAT`
+    - support for the floating point type (%f)
+* `PRINTF_DISABLE_SUPPORT_EXPONENTIAL`
+    - support for exponential floating point notation (%e/%g)
+    - Default: active
+* `PRINTF_DEFAULT_FLOAT_PRECISION` (unsigned integer)
+* `PRINTF_MAX_FLOAT` (float value)
+    - define the largest float suitable to print with %f
+    - Default: active
+    - 1e9
+* `PRINTF_DISABLE_SUPPORT_LONG_LONG`
+    - support for the long long types (%llu or %p)
+    * Default: active
+* `PRINTF_DISABLE_SUPPORT_PTRDIFF_T`
+    - support for the ptrdiff_t type (%t)
+    - Default: active
+
+For AVR chips, the library will automatically set `PRINTF_DISABLE_SUPPORT_EXPONENTIAL` and `PRINTF_DISABLE_SUPPORT_LONG_LONG`. You can re-enable these settings by defining `PRINTF_PREVENT_DEFAULT_AVR_SETTINGS`.
+
+Because these settings control behavior in the source file, they cannot be defined in the sketch. You must adjust the compilation commands for your project in order for the changes to take effect.
+
+If you're using a Makefile or other build system, you'd use the `-D` flag (e.g., `-DPRINTF_DISABLE_SUPPORT_EXPONENTIAL`) to the library build target. For Arduino IDE, the flags need to be added to the compiler.extra_flags property in [platform.txt](https://arduino.github.io/arduino-cli/platform-specification/#platformtxt) or [platform.local.txt](https://arduino.github.io/arduino-cli/platform-specification/#platformlocaltxt). You would need to restart the IDE for the changes to take effect.
+
+Here are comparisons for a simple test sketch showing the overall sketch size for different configurations:
+
+| Type           | Bytes |
+| -------------- | ----- |
+| No Serial      | 1606  |
+| All options enabled | 9476  |
+| Disable long long and exponential | 6328 |
+| Disable long long, float, and exponential | 4256 |
 
 ## Examples
 
