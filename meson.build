@@ -25,20 +25,27 @@ if meson.is_cross_build()
 	arduinocore_dep = arduinocore.get_variable('arduinocore_dep')
 	arduinocore_main_dep = arduinocore.get_variable('arduinocore_main_dep')
 
-	libPrintf_includes = include_directories('src')
-
+	##################
+	# Library Target #
+	##################
 	libPrintf = static_library('Printf',
 		'src/LibPrintf.cpp',
-		include_directories: libPrintf_includes,
+		include_directories: include_directories('src'),
 		dependencies: arduinocore_dep,
 		build_by_default: meson.is_subproject() == false
 	)
 
+	#######################
+	# External Dependency #
+	#######################
 	libPrintf_dep = declare_dependency(
-		include_directories: libPrintf_includes,
+		include_directories: include_directories('src', is_system: true),
 		link_with: libPrintf,
 	)
 
+	##########################
+	# Example Sketch Targets #
+	##########################
 	if meson.is_subproject() == false
 		# Compile example applications
 		executable('default_to_serial',
