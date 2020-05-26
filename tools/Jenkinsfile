@@ -1,0 +1,121 @@
+#!groovy
+@Library('jenkins-pipeline-lib') _
+
+pipeline
+{
+	agent any
+	environment
+	{
+		GIT_CHANGE_LOG = gitChangeLog(currentBuild.changeSets)
+	}
+	parameters
+	{
+		string(defaultValue: '1', description: 'Major version number (x.0.0)', name: 'MAJOR_VERSION')
+		string(defaultValue: '1', description: 'Minor version number (0.x.0)', name: 'MINOR_VERSION')
+	}
+	triggers
+	{
+		//At 04:00 on every day-of-week from Monday through Friday.
+		pollSCM('H 4 * * 1-5')
+	}
+	stages
+	{
+		stage('Setup')
+		{
+			steps
+			{
+				gitTagPreBuild "${params.MAJOR_VERSION}.${params.MINOR_VERSION}.${BUILD_NUMBER}"
+
+				echo 'Removing existing build results'
+				sh 'make distclean'
+			}
+		}
+		stage('Cross compile for AVR')
+		{
+			steps
+			{
+				sh 'make CROSS=avr:arduino_mega'
+			}
+			post
+			{
+				always
+				{
+					recordIssues(
+						healthy: 5,
+						unhealthy: 10,
+						aggregatingResults: true,
+						referenceJobName: 'ea-nightly/arduino-printf/master',
+						sourceDirectory: 'buildresults/',
+						filters: [
+							excludeFile('subprojects/*')
+						],
+						qualityGates: [
+							// 3 new issue: unstable
+							[threshold: 3, type: 'DELTA', unstable: true],
+							// 5 new issues: failed build
+							[threshold: 5, type: 'DELTA', unstable: false],
+							// 10 total issues: unstable
+							[threshold: 10, type: 'TOTAL', unstable: true],
+							// 20 total issues: fail
+							[threshold: 20, type: 'TOTAL', unstable: false]
+						],
+						tools: [
+							gcc(id: 'gcc-avr', name: 'gcc-avr'),
+						]
+					)
+				}
+			}
+		}
+	}
+	post
+	{
+		always
+		{
+			// Scan for open tasks, warnings, issues, etc.
+			recordIssues(
+				healthy: 5,
+				unhealthy: 10,
+				aggregatingResults: true,
+				referenceJobName: 'ea-nightly/arduino-printf/master',
+				filters: [
+					excludeFile('subprojects/*')
+				],
+				qualityGates: [
+					// 3 new issue: unstable
+					[threshold: 3, type: 'DELTA', unstable: true],
+					// 5 new issues: failed build
+					[threshold: 5, type: 'DELTA', unstable: false],
+					// 10 total issues: unstable
+					[threshold: 10, type: 'TOTAL', unstable: true],
+					// 20 total issues: fail
+					[threshold: 20, type: 'TOTAL', unstable: false]
+				],
+				tools: [
+					taskScanner(
+						excludePattern: 'buildresults/**, subprojects/**, build/**, extras/**',
+						includePattern: '**/*.c, **/*.cpp, **/*.h, **/*.hpp, **/*.sh, **/*.build, **/*.ino',
+						normalTags: 'TODO, to do, WIP',
+						highTags: 'FIXME, FIX',
+						ignoreCase: true,
+					),
+				]
+			)
+
+			gitTagCleanup "${params.MAJOR_VERSION}.${params.MINOR_VERSION}.${BUILD_NUMBER}"
+		}
+		success
+		{
+			gitTagSuccess "${params.MAJOR_VERSION}.${params.MINOR_VERSION}.${BUILD_NUMBER}"
+		}
+		failure
+		{
+			/*
+			* This job does not have a GitHub configuration,
+			* so we need to create a dummy config
+			*/
+			githubSetConfig('69e4682e-2951-492f-b828-da06364c322d')
+			githubFileIssue()
+			emailNotify(currentBuild.currentResult)
+		}
+	}
+}
