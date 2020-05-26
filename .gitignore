@@ -1,6 +1,10 @@
 # Generated files
 buildresults/**
 
+# Meson subprojects
+**/subprojects/**
+!**/subprojects/*.wrap
+
 # Prerequisites
 *.d
 
