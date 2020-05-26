@@ -35,29 +35,21 @@ libPrintf_dep = declare_dependency(
 if meson.is_subproject() == false
 	# Compile example applications
 	executable('default_to_serial',
-		files('examples/default_to_serial/default_to_serial.ino'),
+		files('extras/sketch_cpp/default_to_serial.cpp'),
 		dependencies: [
 			libPrintf_dep,
 			arduinocore_dep,
 			arduinocore_main_dep,
-		],
-		cpp_args: [
-			'-xc++',
-			'-includeArduino.h'
 		],
 		install: false
 	)
 
 	executable('override_putchar',
-		files('examples/override_putchar/override_putchar.ino'),
+		files('extras/sketch_cpp/override_putchar.cpp'),
 		dependencies: [
 			libPrintf_dep,
 			arduinocore_dep,
 			arduinocore_main_dep,
-		],
-		cpp_args: [
-			'-xc++',
-			'-includeArduino.h'
 		],
 		install: false
 	)
@@ -65,15 +57,11 @@ if meson.is_subproject() == false
 	if host_machine.cpu() == 'atmega2560'
 		# Serial1 is only usable on the Mega, not the Uno
 		executable('specify_print_class',
-			files('examples/specify_print_class/specify_print_class.ino'),
+			files('extras/sketch_cpp/specify_print_class.cpp'),
 			dependencies: [
 				libPrintf_dep,
 				arduinocore_dep,
 				arduinocore_main_dep,
-			],
-			cpp_args: [
-				'-xc++',
-				'-includeArduino.h'
 			],
 			install: false
 		)
