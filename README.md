@@ -35,7 +35,9 @@ void setup() {
 ```
 
 By default, the library can be used without any special initialization. Any `printf()` calls will be output using 
-the Arduino `Serial` interface.
+the Arduino `Serial` interface. If you need to use a different interface, call `printf_init`.
+
+If you only want to use `s[n]printf`, then you do not need to initialize the library.
 
 ## Advanced Usage
 
