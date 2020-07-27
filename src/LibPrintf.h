@@ -10,7 +10,7 @@
 //
 // The caller is responsible for configure the Serial interface in setup() and calling
 // Serial.begin().
-#ifdef UNO_WIFI_REV2_328MODE
+#ifdef __AVR_ATmega4809__
 void printf_init(arduino::Print& StreamClass);
 #else
 void printf_init(Print& StreamClass);
