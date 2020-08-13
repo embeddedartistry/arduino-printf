@@ -1,6 +1,6 @@
 [submodule "printf"]
 	path = extras/printf/printf-submodule
-	url = git@github.com:mpaland/printf.git
+	url = https://github.com/mpaland/printf.git
 [submodule "build"]
 	path = build
-	url = git@github.com:embeddedartistry/meson-buildsystem.git
+	url = https://github.com/embeddedartistry/meson-buildsystem.git
