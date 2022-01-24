@@ -2,7 +2,11 @@
 #define ARDUINO_PRINTF_H_
 
 #include "Print.h"
+#define PRINTF_ALIAS_STANDARD_FUNCTION_NAMES 1
 #include "../extras/printf/printf.h"
+
+// Adds a compatibility definition for those who were using the old library
+#define _putchar(c) putchar_(c)
 
 // In Setup(), you must initialize printf with a Print class if you don't want
 // to use the default Serial object. If you want the default behavior, calling this

@@ -1,6 +1,6 @@
 # Arduino Printf
 
-This library adds support for the `printf()` function to Arduino projects. This code leverages the wonderful [mpaland/printf](https://github.com/mpaland/printf) library, which is designed for use in embedded systems. For more information about what is available, please refer to the [parent library documentation](https://github.com/mpaland/printf/blob/master/README.md).
+This library adds support for the `printf()` function to Arduino projects. This code leverages the wonderful [eyalroz/printf](https://github.com/mpaland/printf) library, which is designed for use in embedded systems. For more information about what is available, please refer to the [parent library documentation](https://github.com/mpaland/printf/blob/master/README.md).
 
 ## What This Library Provides
 
@@ -96,5 +96,5 @@ Multiple examples are provided with this library in the [examples/](examples/) f
     - Any class derived from the `Print` base class can be used with the **Arduino Printf** library
     - This example initializes `printf` with `Serial1` instead of `Serial`
 * [Override Putchar](examples/override_putchar/override_putchar.ino)
-    - This example overrides `_putchar()` and adds a space in between every letter
-    - You can implement any kind of logic within `_putchar()` that you like, such as outputting information to multiple ports
+    - This example overrides `putchar_()` and adds a space in between every letter
+    - You can implement any kind of logic within `putchar_()` that you like, such as outputting information to multiple ports

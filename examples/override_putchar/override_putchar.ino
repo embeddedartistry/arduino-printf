@@ -1,7 +1,7 @@
 /**
 * This sketch demonstrates the ability to override the ArduinoPrintf library's
-* default implementation of _putchar() with a custom user implementation.
-* You can do anything you want in your _putchar() function: output to multiple ports,
+* default implementation of putchar_() with a custom user implementation.
+* You can do anything you want in your putchar_() function: output to multiple ports,
 * filter data, add extra characters, etc.
 */
 
@@ -12,7 +12,7 @@ void setup() {
   Serial.begin(115200);
 }
 
-void _putchar(char character)
+void putchar_(char character)
 {
   Serial.print(character);
   Serial.print(' ');

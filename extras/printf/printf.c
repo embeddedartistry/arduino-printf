@@ -49,7 +49,7 @@
 #include "printf_config.h"
 #endif
 
-#include <printf/printf.h>
+#include "printf.h"
 
 #if PRINTF_ALIAS_STANDARD_FUNCTION_NAMES
 # define printf_    printf
