@@ -25,3 +25,26 @@ extern "C" __attribute__((weak)) void putchar_(char character)
 {
 	print_instance->print(character);
 }
+
+#if __GNUC__
+/// This works around a problem where GCC is replacing
+/// printf("string with no args") with puts("string with no args"), which
+/// is not actually implemented in a way that is suitable for us, resulting
+/// in an infinite reboot loop or simply not printing that output, depending
+/// on my luck.
+///
+/// This is probably NOT the right way to go about this (expecting it to be undefined
+/// behavior, but I have fewer tools available in Arduino land, so I am
+/// sticking with this for now.
+///
+/// If this causes problems in the future, the next thing to try is
+/// NOT using the Aliasing option (currently defined in LibPrintf.h) and instead
+/// then providing definitions in the mpaland style in our LibPrintf.h header:
+/// #define printf printf_
+/// #define vprintf vprintf_
+/// etc.
+extern "C" int puts(const char * str)
+{
+	return printf("%s\n", str);
+}
+#endif //__GNUC__
