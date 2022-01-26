@@ -2,8 +2,14 @@
 #define ARDUINO_PRINTF_H_
 
 #include "Print.h"
-#define PRINTF_ALIAS_STANDARD_FUNCTION_NAMES 1
 #include "../extras/printf/printf.h"
+
+# define printf    printf_
+# define sprintf   sprintf_
+# define vsprintf  vsprintf_
+# define snprintf  snprintf_
+# define vsnprintf vsnprintf_
+# define vprintf   vprintf_
 
 // Adds a compatibility definition for those who were using the old library
 #define _putchar(c) putchar_(c)
