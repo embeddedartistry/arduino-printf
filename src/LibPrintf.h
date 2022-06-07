@@ -1,6 +1,19 @@
 #ifndef ARDUINO_PRINTF_H_
 #define ARDUINO_PRINTF_H_
 
+#ifdef PRINTF_DISABLE_ALL
+
+#define printf(...)
+#define sprintf(...)
+#define vsprintf(...)
+#define snprintf(...)
+#define vsnprintf(...)
+#define vprintf(...)
+
+#define printf_init(...)
+
+#else // printf is enabled
+
 #include "Print.h"
 #include "../extras/printf/printf.h"
 
@@ -24,6 +37,7 @@
 void printf_init(arduino::Print& StreamClass);
 #else
 void printf_init(Print& StreamClass);
-#endif
+#endif // __AVR_ATmega4809__
 
+#endif // PRINTF_DISABLE_ALL
 #endif //ARDUINO_PRINTF_H_

@@ -47,6 +47,8 @@ See [advanced_usage.md](advanced_usage.md).
 
 If memory footprint is critical, you can disable library features using compiler definitions. Available controls are:
 
+* `PRINTF_DISABLE_ALL`
+    - Remove all `printf` calls from the program
 * `PRINTF_NTOA_BUFFER_SIZE` (unsigned integer)
     * 'ntoa' conversion buffer size, this must be big enough to hold one converted numeric number including padded zeros (dynamically created on stack)
     * Default: 32 bytes

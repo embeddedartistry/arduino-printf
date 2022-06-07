@@ -1,4 +1,6 @@
 #include "LibPrintf.h"
+
+#ifndef PRINTF_DISABLE_ALL
 #include "Arduino.h"
 
 #ifdef __AVR__
@@ -25,3 +27,5 @@ extern "C" __attribute__((weak)) void putchar_(char character)
 {
 	print_instance->print(character);
 }
+
+#endif // PRINTF_DISABLE_ALL
