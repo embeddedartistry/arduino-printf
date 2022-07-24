@@ -1,6 +1,6 @@
 {
   "name": "LibPrintf",
-  "version": "1.2.11",
+  "version": "1.2.13",
   "description": "This library provides support for printf() and other printf-like functions with full format-string support. Default output is to Serial, but can be customized.",
   "keywords": "printf, debugging",
   "repository": {
