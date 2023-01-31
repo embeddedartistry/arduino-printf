@@ -5,6 +5,6 @@ source_url = http://downloads.arduino.cc/cores/avr-1.8.2.tar.bz2
 source_filename = avr-1.8.2.tar.bz2
 source_hash = 6213d41c6e91a75ac931527da5b10f2dbe0140c8cc1dd41b06cd4e78b943f41b
 
-patch_url = https://wrapdb.mesonbuild.com/v1/projects/arduinocore-avr/1.8.2/1/get_zip
-patch_filename = arduinocore-avr-1.8.2-1-wrap.zip
-patch_hash = 32d9bbf08fd0c5f10be5ede1355af7c60e37d0cb759e903bf5c37a8047744faa
+patch_url = https://github.com/embeddedartistry/arduinocore-avr/releases/download/1.8.2-1/arduinocore-avr-1.8.2-1-patch.zip
+patch_filename = arduinocore-avr-1.8.2-1-patch.zip
+patch_hash = fcd198fc38aa55398d448a23fc006005331a4943b0c440f38b61b671c1324a25
