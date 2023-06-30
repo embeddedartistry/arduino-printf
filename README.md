@@ -26,11 +26,11 @@ as part of the base library. You do not need this library for those platforms.
 
 To use this library in your Arduino project, you need to include the header:
 
-```
+```cpp
 #include <LibPrintf.h>
 
 void setup() {
-    serial.begin(115200);
+    Serial.begin(115200);
 }
 ```
 
