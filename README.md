@@ -30,7 +30,7 @@ To use this library in your Arduino project, you need to include the header:
 #include <LibPrintf.h>
 
 void setup() {
-    serial.begin(115200);
+    Serial.begin(115200);
 }
 ```
 
